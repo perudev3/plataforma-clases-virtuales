@@ -26,18 +26,30 @@ class CourseController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'is_paid' => 'required|boolean',
-            'price' => 'nullable|required_if:is_paid,1'
+            'price' => 'nullable|required_if:is_paid,1',
+            'programa' => 'required|string|in:diplomado,especializacion,curso,seminario',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('courses', 'public');
+        }
 
         Course::create([
             'title' => $request->title,
             'description' => $request->description,
             'is_paid' => $request->is_paid,
             'price' => $request->is_paid ? $request->price : null,
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
+            'programa' => $request->programa,
+            'image' => $imagePath
         ]);
 
-        return redirect()->route('docente.courses.index')
+        /* return redirect()->route('docente.courses.index')
+            ->with('success', 'Curso creado correctamente'); */
+
+        return redirect()->route('courses.index')
             ->with('success', 'Curso creado correctamente');
     }
 }

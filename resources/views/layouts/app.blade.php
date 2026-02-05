@@ -115,6 +115,25 @@
 
                         @endif
 
+                        {{-- ESTUDIANTE --}}
+                        @if(Auth::user()->role === 'student')   
+
+                            <li class="nav-item">
+                                <a href="{{ route('alumno.courses.index') }}" class="nav-link">
+                                    📚 Explorar Cursos
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('alumno.courses') }}" class="nav-link">
+                                    🎓 Mis Cursos
+                                </a>
+                            </li>
+
+                        @endif
+
+
+
                     @endauth
 
                 </ul>

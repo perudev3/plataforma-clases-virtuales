@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Course;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $courses = Course::orderBy('id', 'asc')->get();
+
+        // Filtrarlos por tipo
+        $cursos = $courses->where('programa', 'curso')->get();
+        $especializaciones = $courses->where('programa', 'especializacion')->get();
+        $diplomados = $courses->where('programa', 'diplomado')->get();
+
+        return view('home', compact('cursos', 'especializaciones','diplomados'));
     }
 }

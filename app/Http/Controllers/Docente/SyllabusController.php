@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Course;
 use App\Syllabus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SyllabusController extends Controller
 {
@@ -21,47 +22,55 @@ class SyllabusController extends Controller
     }
 
     public function create(Course $course)
-    {
+    {   
         $this->authorizeTeacher($course);
 
-        return view('docente.syllabus.create', compact('course'));
+        return view('syllabus.create', compact('course'));
+        /* return view('docente.syllabus.create', compact('course')); */
     }
 
     public function store(Request $request, Course $course)
     {
+            // 2️⃣ Preparar video
+            $videoPath = null;
+            if ($request->type === 'video' && $request->hasFile('video_file')) {
+                $destination = storage_path('app/public/syllabus/videos');
+                if (!file_exists($destination)) {
+                    mkdir($destination, 0755, true);
+                    Log::info('Carpeta creada: '.$destination);
+                } else {
+                    Log::info('Carpeta ya existe: '.$destination);
+                }
 
-        if ($course->user_id !== auth()->id()) {
-            abort(403);
-        }
+                $videoPath = $request->file('video_file')->store('syllabus/videos', 'public');
+                Log::info('Video subido: '.$videoPath);
+            } else {
+                Log::info('No es video, videoPath = null');
+            }
 
-        $request->validate([
-            'title' => 'required',
-            'type' => 'required|in:video,zoom',
-            'video_file' => 'required_if:type,video|mimes:mp4,mov,webm|max:51200',
-            'zoom_link' => 'required_if:type,zoom|url',
-        ]);
+            // 3️⃣ Crear Syllabus
+            try {
+                $syllabus = Syllabus::create([
+                    'course_id' => $course->id,
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'type' => $request->type,
+                    'video_url' => $videoPath,
+                    'zoom_link' => $request->zoom_link,
+                    'order' => 0,
+                ]);
 
-        $videoPath = null;
+            } catch (\Exception $e) {
+                return back()->with('error', 'No se pudo guardar el tema: '.$e->getMessage());
+            }
 
-        if ($request->type === 'video' && $request->hasFile('video_file')) {
-            $videoPath = $request->file('video_file')
-                ->store('syllabus/videos', 'public');
-        }
-
-        Syllabus::create([
-            'course_id' => $course->id,
-            'title' => $request->title,
-            'description' => $request->description,
-            'type' => $request->type,
-            'video_url' => $videoPath,
-            'zoom_link' => $request->zoom_link,
-            'order' => 0,
-        ]);
-
-        return redirect()
-            ->route('docente.syllabus.index', $course)
-            ->with('success', 'Tema agregado correctamente');
+            // 4️⃣ Redirigir con éxito
+            return redirect()
+                ->route('syllabus.index', ['course' => $course->id])
+                ->with('success', 'Tema agregado correctamente');
     }
+
+
 
     private function authorizeTeacher(Course $course)
     {

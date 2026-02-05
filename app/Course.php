@@ -12,7 +12,9 @@ class Course extends Model
         'is_paid',
         'price',
         'status',
-        'user_id'
+        'user_id',
+        'programa',
+        'image'
     ];
 
     public function teacher()
@@ -24,4 +26,12 @@ class Course extends Model
     {
         return $this->hasMany(Lesson::class);
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class)
+            ->withPivot('enrolled_at')
+            ->withTimestamps();
+    }
+
 }

@@ -68,7 +68,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
 
-            <form method="POST" action="{{ route('docente.syllabus.store', $course) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('syllabus.store', $course) }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="modal-header">

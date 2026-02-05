@@ -21,6 +21,8 @@ class CreateCoursesTable extends Migration
             $table->boolean('is_paid')->default(false);
             $table->decimal('price', 8, 2)->nullable();
             $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->text('programa')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

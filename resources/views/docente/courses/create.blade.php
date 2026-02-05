@@ -6,7 +6,7 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <form method="POST" action="{{ route('docente.courses.store') }}">
+            <form method="POST" action="{{ route('courses.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
@@ -30,6 +30,22 @@
                 <div class="form-group" id="price-group" style="display:none;">
                     <label>Precio</label>
                     <input type="number" step="0.01" name="price" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de programa</label>
+                    <select name="programa" class="form-control" required>
+                        <option value="">-- Seleccionar --</option>
+                        <option value="diplomado">Diplomado</option>
+                        <option value="especializacion">Especialización</option>
+                        <option value="curso">Curso</option>
+                        <option value="seminario">Seminario</option>
+                    </select>
+                </div>                
+
+                <div class="form-group">
+                    <label>Imagen de portada</label>
+                    <input type="file" name="image" class="form-control" accept="image/*" required>
                 </div>
 
                 <button class="btn btn-primary">Guardar curso</button>

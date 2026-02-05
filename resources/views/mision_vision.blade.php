@@ -741,7 +741,7 @@
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ url('nosotros') }}">Historia</a>
-                            <a class="dropdown-item" href="{{ url('mision_vision') }}">Misión / Visión</a>
+                            <a class="dropdown-item" href="#">Misión / Visión</a>
                             <a class="dropdown-item" href="#">Consejo Directivo</a>
                             <a class="dropdown-item" href="#">Plana Docente</a>
                             <a class="dropdown-item" href="#">Convenios / Acreditaciones</a>
@@ -808,487 +808,62 @@
     </nav>
 </div>
 
-
-<!-- HERO -->
-<section class="hero hero-bg">
+<!-- ================== SECCIÓN MISIÓN, VISIÓN Y VALORES ================== -->
+<section class="section benefits-pro" id="mision-vision-valores">
     <div class="container">
-        <h1 class="hero-title">
-            La escuela más completa de capacitación académica del Perú
-        </h1>
+        <!-- Título sección -->
+        <h2 class="section-title text-center mb-5">Misión, Visión y Valores</h2>
 
-        <p class="hero-subtitle mt-3">
-            Diplomados, programas especializados y educación continua con enfoque profesional.
-        </p>
-
-        <p class="hero-question mt-4">¿Qué quieres aprender?</p>
-
-        <div class="row mt-3">
-            <div class="col-md-7">
-                <form class="search-hero">
-                    <input type="text" placeholder="Busca un curso, diplomado o programa">
-                    <button type="submit">🔍</button>
-                </form>
-            </div>
-        </div>
-
-        <p class="hero-extra mt-4">
-            Inicia cualquier curso gratis.<br>
-            <strong>O adquiere ESIPEC para tu empresa</strong>
-        </p>
-    </div>
-</section>
-
-
-
-<!-- DESTACADOS -->
-<section class="section bg-light">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Programas Destacados</h2>
-
-        <div class="row">
-
-            <!-- DIPLOMADOS -->
-            <div class="col-md-4 mb-4">
-                <div class="program-card">
-                    <img src="{{ asset('images/image_destacados.png') }}" alt="Diplomados">
-
-                    <div class="program-body">
-                        <span class="program-type">Diplomados de Especialización</span>
-
-                        <h5>Diplomado en Derecho Penal y Procesal Penal</h5>
-                        <p>Diplomado en Derecho de Familia y Procesal Familiar</p>
-                        <p>Diplomado en Derecho Civil Procesal Civil</p>
-
-                        <div class="program-meta">
-                            Virtual • En progreso
-                        </div>
-
-                        <div class="program-actions">
-                            <a href="#" class="btn btn-primary btn-sm">Inicia gratis</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CURSOS DE ESPECIALIZACIÓN -->
-            <div class="col-md-4 mb-4">
-                <div class="program-card">
-                    <img src="{{ asset('images/image_destacados.png') }}" alt="Cursos">
-
-                    <div class="program-body">
-                        <span class="program-type">Cursos de Especialización</span>
-
-                        <h5>Derecho del Consumo</h5>
-                        <p>Arbitraje</p>
-                        <p>Notarial</p>
-
-                        <div class="program-meta">
-                            Virtual • En progreso
-                        </div>
-
-                        <div class="program-actions">
-                            <a href="#" class="btn btn-primary btn-sm">Inicia gratis</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CURSOS DE ACTUALIZACIÓN -->
-            <div class="col-md-4 mb-4">
-                <div class="program-card">
-                    <img src="{{ asset('images/image_destacados.png') }}" alt="Actualización">
-
-                    <div class="program-body">
-                        <span class="program-type">Cursos de Actualización</span>
-
-                        <h5>Derecho Administrativo</h5>
-                        <p>Derecho Constitucional</p>
-                        <p>Derecho Penal</p>
-
-                        <div class="program-meta">
-                            Virtual • En progreso
-                        </div>
-
-                        <div class="program-actions">
-                            <a href="#" class="btn btn-primary btn-sm">Inicia gratis</a>
-                            <a href="#" class="btn btn-outline-primary btn-sm">Ver detalles</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ============================= -->
-<!-- CURSOS -->
-<!-- ============================= -->
-<section class="section">
-    <div class="container">
-        <h2 class="section-title text-center">Cursos</h2>
-        <div class="row">
-            @if(isset($cursos) && $cursos->count())
-                @foreach($cursos as $curso)
-                    <div class="col-md-3 mb-4">
-                        <div class="program-card">
-                            <img src="{{ asset($curso->image) }}" alt="{{ $curso->title ?? 'Curso' }}">
-                            <div class="program-body">
-                                <span class="program-type">{{ $curso->is_paid === 1 ? 'Pago' : ' Gratis' }}</span>
-                                <h5>{{ $curso->title ?? 'Título del curso' }}</h5>
-                                <p>Precio: {{ $curso->price ?? '0' }}</p>
-                                <div class="program-actions">
-                                    <a href="#" class="btn btn-primary btn-sm">Ver curso</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <p class="text-center w-100">No hay cursos disponibles.</p>
-            @endif
-        </div>
-    </div>
-</section>
-
-<!-- ============================= -->
-<!-- ESPECIALIZACIONES -->
-<!-- ============================= -->
-<section class="section bg-light">
-    <div class="container">
-        <h2 class="section-title text-center">Programas de Especialización</h2>
-        <div class="row">
-            @if(isset($especializaciones) && $especializaciones->count())
-                @foreach($especializaciones as $esp)
-                    <div class="col-md-4 mb-4">
-                        <div class="program-card">
-                            <img src="{{ asset($esp->image) }}" alt="{{ $esp->title ?? 'Especialización' }}">
-                            <div class="program-body">
-                                <span class="program-type">{{ $esp->is_paid === 1 ? 'Pago' : ' Gratis'}}</span>
-                                <h5>{{ $esp->title ?? 'Título del programa' }}</h5>
-                                <p>Precio: {{ $esp->price ?? '0' }}</p>
-                                <div class="program-actions">
-                                    <a href="#" class="btn btn-primary btn-sm">Ver programa</a>
-                                    <a href="#" class="btn btn-outline-primary btn-sm">Inscribirme</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <p class="text-center w-100">No hay especializaciones disponibles.</p>
-            @endif
-        </div>
-    </div>
-</section>
-
-<!-- ============================= -->
-<!-- DIPLOMADOS -->
-<!-- ============================= -->
-<section class="section bg-light">
-    <div class="container">
-        <h2 class="section-title text-center">Diplomados</h2>
-        <div class="row">
-            @if(isset($diplomados) && $diplomados->count())
-                @foreach($diplomados as $diplomado)
-                    <div class="col-md-4 mb-4">
-                        <div class="program-card">
-                            <img src="{{ asset($diplomado->image) }}" alt="{{ $diplomado->title ?? 'Diplomado' }}">
-                            <div class="program-body">
-                                <span class="program-type">{{ $diplomado->is_paid === 1 ? 'Pago' : ' Gratis' }}</span>
-                                <h5>{{ $diplomado->title ?? 'Título del diplomado' }}</h5>
-                                <p>Precio: {{ $diplomado->price ?? '0' }}</p>
-                                <div class="program-actions">
-                                    <a href="#" class="btn btn-primary btn-sm">Ver programa</a>
-                                    <a href="#" class="btn btn-outline-primary btn-sm">Inscribirme</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <p class="text-center w-100">No hay diplomados disponibles.</p>
-            @endif
-        </div>
-    </div>
-</section>
-
-
-<!-- POR QUÉ ESIPEC -->
-<section class="section why-esipec">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <!-- IZQUIERDA -->
+        <div class="row g-4">
+            <!-- Misión -->
             <div class="col-md-6">
-                <h2 class="why-title">
-                    Te <span>ofrecemos</span>
-                </h2>
-
-                <div class="why-list">
-
-                    <div class="why-item">
-                        <div class="why-icon">
-                            <!-- Clases en vivo -->
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="4" width="18" height="14" rx="2"/>
-                                <path d="M8 20h8"/>
-                                <path d="M12 14v4"/>
-                            </svg>
+                <div class="benefit-card text-start p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="benefit-icon bg-primary text-white me-3">
+                            <i class="fas fa-bullseye"></i>
                         </div>
-                        <div>
-                            <h5>Clases en vivo</h5>
-                            <p>Participa en vivo, aprende desde cualquier lugar.</p>
-                        </div>
+                        <h4 class="mb-0">Misión</h4>
                     </div>
-
-                    <div class="why-item">
-                        <div class="why-icon">
-                            <!-- Proyectos reales -->
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 7h16"/>
-                                <path d="M4 12h16"/>
-                                <path d="M4 17h16"/>
-                                <path d="M9 7v10"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h5>Proyectos reales</h5>
-                            <p>Entrénate con desafíos reales.</p>
-                        </div>
-                    </div>
-
-                    <div class="why-item">
-                        <div class="why-icon">
-                            <!-- Docentes expertos -->
-                            <svg viewBox="0 0 24 24">
-                                <circle cx="12" cy="8" r="4"/>
-                                <path d="M4 20c1.5-4 14.5-4 16 0"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h5>Docentes expertos</h5>
-                            <p>Directivos y profesionales de primer nivel.</p>
-                        </div>
-                    </div>
-
-                    <div class="why-item">
-                        <div class="why-icon">
-                            <!-- Programas dedicados -->
-                            <svg viewBox="0 0 24 24">
-                                <rect x="4" y="3" width="16" height="18" rx="2"/>
-                                <path d="M8 7h8"/>
-                                <path d="M8 11h8"/>
-                                <path d="M8 15h6"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h5>Programas académicos dedicados</h5>
-                            <p>Desde fundamentos hasta especializaciones.</p>
-                        </div>
-                    </div>
-
-                    <div class="why-item">
-                        <div class="why-icon">
-                            <!-- Software -->
-                            <svg viewBox="0 0 24 24">
-                                <rect x="2" y="4" width="20" height="14" rx="2"/>
-                                <path d="M8 20h8"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <h5>Softwares profesionales</h5>
-                            <p>Domina tecnologías clave para tu carrera.</p>
-                        </div>
-                    </div>
-
+                    <p class="mb-0">Brindar educación continua y formación especializada de calidad, orientada a la actualización permanente y al fortalecimiento de las competencias profesionales, mediante programas académicos diseñados con rigor, enfoque práctico y alineados a las necesidades del ejercicio profesional.</p>
                 </div>
             </div>
 
-            <!-- DERECHA -->
-            <div class="col-md-6 text-center">
-                <img
-                    src="{{ asset('images/image_destacados.png') }}"
-                    class="why-image responsive-img"
-                    alt="Formación ESIPEC"
-                >
-
+            <!-- Visión -->
+            <div class="col-md-6">
+                <div class="benefit-card text-start p-4 h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="benefit-icon bg-primary text-white me-3">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4 class="mb-0">Visión</h4>
+                    </div>
+                    <p class="mb-0">Ser una institución referente en educación continua y formación especializada, reconocida por la calidad de sus programas, su propuesta académica innovadora y su contribución al desarrollo profesional y social.</p>
+                </div>
             </div>
+        </div>
 
+        <!-- Valores -->
+        <div class="row mt-5"> <!-- Separación con margin-top -->
+            <div class="col-12">
+                <div class="benefit-card text-start p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="benefit-icon bg-primary text-white me-3">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4 class="mb-0">Valores</h4>
+                    </div>
+                    <ul class="mb-0 ps-3">
+                        <li><i class="fas fa-check-circle text-primary me-2"></i> Excelencia académica, en el diseño y desarrollo de nuestros programas.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i> Compromiso, con la formación y el crecimiento profesional de nuestros participantes.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i> Ética, en el ejercicio académico e institucional.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i> Responsabilidad social, como parte de nuestro aporte a la sociedad.</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i> Innovación, en el uso de herramientas y metodologías educativas.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
-
-
-<!-- DOCENTES -->
-<section class="section docentes">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Docentes</h2>
-
-        <div class="row justify-content-center">
-
-            <!-- DOCENTE 1 -->
-            <div class="col-md-4 col-sm-6 mb-4">
-                <div class="docente-card">
-                    <div class="docente-photo">
-                        <img src="{{ asset('images/docente-1.jpg') }}" alt="Julio César Escobar Andia">
-                    </div>
-                    <h5>Julio César Escobar Andia</h5>
-                </div>
-            </div>
-
-            <!-- DOCENTE 2 -->
-            <div class="col-md-4 col-sm-6 mb-4">
-                <div class="docente-card">
-                    <div class="docente-photo">
-                        <img src="{{ asset('images/docente-2.jpg') }}" alt="Luis Rioja Espinoza">
-                    </div>
-                    <h5>Luis Rioja Espinoza</h5>
-                </div>
-            </div>
-
-            <!-- DOCENTE 3 -->
-            <div class="col-md-4 col-sm-6 mb-4">
-                <div class="docente-card">
-                    <div class="docente-photo">
-                        <img src="{{ asset('images/docente-3.jpg') }}" alt="Sergio Chávez Panduro">
-                    </div>
-                    <h5>Sergio Chávez Panduro</h5>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- BENEFICIOS -->
-<section class="benefits-pro">
-    <div class="container">
-
-        <div class="row align-items-center">
-            <div class="col-lg-5 mb-4 mb-lg-0 text-center">
-                <img 
-                    src="{{asset('images/beneficios.jpg')}}" 
-                    alt="Beneficios ESIPEC"
-                    class="benefits-img"
-                >
-            </div>
-
-            <div class="col-lg-7">
-                <h2 class="section-title mb-4">Beneficios exclusivos</h2>
-
-                <div class="row">
-
-                    <div class="col-md-6 col-lg-6 mb-4">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-certificate"></i>
-                            </div>
-                            <p>Diploma digital verificable</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-6 mb-4">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-qrcode"></i>
-                            </div>
-                            <p>Código único y código QR para validación inmediata</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-6 mb-4">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-university"></i>
-                            </div>
-                            <p>Validez institucional para fines académicos y profesionales</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-6 mb-4">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-book-open"></i>
-                            </div>
-                            <p>Acceso a biblioteca virtual con material actualizado</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-6 mb-4">
-                        <div class="benefit-card">
-                            <div class="benefit-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <p>Comunidad académica para networking y aprendizaje continuo</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</section>
-
-<!-- TESTIMONIOS -->
-<section class="section bg-light testimonials-section">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">Testimonios</h2>
-
-        <!-- TESTIMONIOS VISIBLES -->
-        <div class="row mb-5">
-            @for ($i = 1; $i <= 3; $i++)
-                <div class="col-md-4 mb-4">
-                    <div class="testimonial-card">
-                        <img src="https://via.placeholder.com/80" class="testimonial-avatar" alt="Alumno">
-                        <h6 class="mt-3 mb-1">Nombre del alumno</h6>
-                        <p class="testimonial-text">
-                            Excelente experiencia académica, contenidos claros y docentes muy preparados.
-                        </p>
-                        <div class="testimonial-stars">★★★★★</div>
-                    </div>
-                </div>
-            @endfor
-        </div>
-
-        <!-- CARRUSEL -->
-        <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-
-                @for ($i = 1; $i <= 6; $i++)
-                    <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <div class="testimonial-card">
-                                    <img src="https://via.placeholder.com/80" class="testimonial-avatar" alt="Alumno">
-                                    <h6 class="mt-3 mb-1">Alumno {{ $i }}</h6>
-                                    <p class="testimonial-text">
-                                        Formación de calidad, plataforma intuitiva y certificación confiable.
-                                    </p>
-                                    <div class="testimonial-stars">★★★★★</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endfor
-
-            </div>
-
-            <!-- CONTROLES -->
-            <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
-        </div>
-    </div>
-</section>
-
 
 <!-- FOOTER -->
 <footer class="footer">
