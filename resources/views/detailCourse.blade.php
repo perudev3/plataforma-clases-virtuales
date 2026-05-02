@@ -342,34 +342,9 @@
 
                         <div class="sidebar-card-body">
 
-                            {{-- ── BLOQUE: COMPRAR CURSO ── --}}
-                            <div class="sidebar-plan-block sidebar-plan-paid">
-                                <div class="sidebar-plan-header">
-                                    <i class="bi bi-star-fill"></i>
-                                    <strong>Al comprar el curso obtienes:</strong>
-                                </div>
-                                <ul class="sidebar-plan-list">
-                                    <li>✔ Clases en vivo con docentes especialistas</li>
-                                    <li>✔ Acceso a todas las grabaciones</li>
-                                    <li>✔ Materiales de estudio descargables</li>
-                                    <li>✔ Certificación con código QR verificable</li>
-                                    <li>✔ Diploma digital oficial de {{ $course->institution ?? 'ESIPEC' }}</li>
-                                    <li>✔ Acceso ilimitado al contenido</li>
-                                </ul>
-                            </div>
+                            
 
-                            {{-- ── BLOQUE: INICIAR GRATIS ── --}}
-                            <div class="sidebar-plan-block sidebar-plan-free">
-                                <div class="sidebar-plan-header">
-                                    <i class="bi bi-lightning-charge-fill"></i>
-                                    <strong>Al iniciar gratis accedes a:</strong>
-                                </div>
-                                <ul class="sidebar-plan-list">
-                                    <li>✔ 3 clases en vivo</li>
-                                    <li>✔ 3 clases grabadas</li>
-                                    <li>✔ Aviso de nuevos cursos</li>
-                                </ul>
-                            </div>
+                            
 
                             {{-- ── CTAs ── --}}
                             <div class="sidebar-cta">
@@ -400,10 +375,41 @@
                                         </a>
                                     @endif
                                 @else
-                                    <button class="btn-sidebar-buy">
-                                        Comprar curso
-                                        <small>A solo S/{{ number_format($course->price_display == 'regular' ? $course->price : $course->discount_price, 2) }}</small>
-                                    </button>
+                                
+                                {{-- ── BLOQUE: COMPRAR CURSO ── --}}
+	                            <div class="sidebar-plan-block sidebar-plan-paid">
+	                                <div class="sidebar-plan-header">
+	                                    <i class="bi bi-star-fill"></i>
+	                                    <strong>Al comprar el curso obtienes:</strong>
+	                                </div>
+	                                <ul class="sidebar-plan-list">
+	                                    <li>✔ Clases en vivo con docentes especialistas</li>
+	                                    <li>✔ Acceso a todas las grabaciones</li>
+	                                    <li>✔ Materiales de estudio descargables</li>
+	                                    <li>✔ Certificación con código QR verificable</li>
+	                                    <li>✔ Diploma digital oficial de {{ $course->institution ?? 'ESIPEC' }}</li>
+	                                    <li>✔ Acceso ilimitado al contenido</li>
+	                                </ul>
+	                            </div>
+	                            <a href="{{ route('login') }}">
+	                                    <button class="btn-sidebar-buy">
+	                                        Comprar curso
+	                                        <small>A solo S/{{ number_format($course->price_display == 'regular' ? $course->price : $course->discount_price, 2) }}</small>
+	                                    </button>
+                                    </a>
+                                    
+                                    {{-- ── BLOQUE: INICIAR GRATIS ── --}}
+	                            <div class="sidebar-plan-block sidebar-plan-free">
+	                                <div class="sidebar-plan-header">
+	                                    <i class="bi bi-lightning-charge-fill"></i>
+	                                    <strong>Al iniciar gratis accedes a:</strong>
+	                                </div>
+	                                <ul class="sidebar-plan-list">
+	                                    <li>✔ 3 clases en vivo</li>
+	                                    <li>✔ 3 clases grabadas</li>
+	                                    <li>✔ Aviso de nuevos cursos</li>
+	                                </ul>
+	                            </div>
                                     <a href="{{ route('login') }}" class="btn-sidebar-free">
                                         <i class="bi bi-person-fill"></i> Inicia sesión para inscribirte
                                     </a>
